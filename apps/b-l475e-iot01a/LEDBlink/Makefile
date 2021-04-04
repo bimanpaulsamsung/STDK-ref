@@ -34,38 +34,48 @@ BUILD_DIR = build
 ######################################
 # source
 ######################################
+APP_SOURCES = \
+main.c \
+stm32l4xx_it.c \
+stm32l4xx_hal_msp.c \
+system_stm32l4xx.c
+
+STDK_CORE_SOURCES =
+
+STM32CUBEL4_SOURCES = \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c \
+$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c
+
 # C sources
 C_SOURCES =  \
-Core/Src/main.c \
-Core/Src/stm32l4xx_it.c \
-Core/Src/stm32l4xx_hal_msp.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c \
-Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c \
-Core/Src/system_stm32l4xx.c
+$(APP_SOURCES) \
+$(STDK_CORE_SOURCES) \
+$(STM32CUBEL4_SOURCES)
+
 
 # ASM sources
 ASM_SOURCES =  \
@@ -121,14 +131,19 @@ C_DEFS =  \
 AS_INCLUDES =
 
 # C includes
-C_INCLUDES =  \
--ICore/Inc \
--IDrivers/STM32L4xx_HAL_Driver/Inc \
--IDrivers/STM32L4xx_HAL_Driver/Inc/Legacy \
--IDrivers/CMSIS/Device/ST/STM32L4xx/Include \
--IDrivers/CMSIS/Include \
--IDrivers/CMSIS/Include
+APP_INCLUDES = -I./
 
+STDK_INCLUDES =
+
+C_INCLUDES =  \
+-I$(STM32CUBEL4)/Core/Inc \
+-I$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Inc \
+-I$(STM32CUBEL4)/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy \
+-I$(STM32CUBEL4)/Drivers/CMSIS/Device/ST/STM32L4xx/Include \
+-I$(STM32CUBEL4)/Drivers/CMSIS/Include \
+-I$(STM32CUBEL4)/Drivers/CMSIS/Include \
+$(APP_INCLUDES) \
+$(STDK_INCLUDES)
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
