@@ -42,13 +42,13 @@ if EXTRA_ARGS:
         FLASH_OPTION = FLASH_OPTION + " --" + args
 
 #Genarate Root CA
-os.chdir(os.path.join(CORE_PATH))
-os.system("cat src/include/certs/boilerplate.h > src/iot_root_ca.c")
-os.system("xxd -i src/certs/" + CA_CERT_FILE + ">> src/iot_root_ca.c")
-os.system("sed -i.bak 's/src.*pem/st_root_ca/g' src/iot_root_ca.c")
-os.system("sed -i.bak 's/unsigned/const unsigned/g' src/iot_root_ca.c")
-os.system("rm -f src/iot_root_ca.c.bak")
-os.chdir(os.path.join(STDK_PATH))
+# os.chdir(os.path.join(CORE_PATH))
+# os.system("cat src/include/certs/boilerplate.h > src/iot_root_ca.c")
+# os.system("xxd -i src/certs/" + CA_CERT_FILE + ">> src/iot_root_ca.c")
+# os.system("sed -i.bak 's/src.*pem/st_root_ca/g' src/iot_root_ca.c")
+# os.system("sed -i.bak 's/unsigned/const unsigned/g' src/iot_root_ca.c")
+# os.system("rm -f src/iot_root_ca.c.bak")
+# os.chdir(os.path.join(STDK_PATH))
 
 MAKEFILE_PATH = os.path.join(BSP_PATH, "apps", APP_NAME)
 print("MAKEFILE_PATH", MAKEFILE_PATH)
