@@ -32,14 +32,15 @@ if not (os.path.exists(os.path.join(BSP_PATH, "apps"))):
     os.mkdir(os.path.join(BSP_PATH, "apps"))
     os.symlink(os.path.join(IOT_APPS_PATH),os.path.join(BSP_PATH, "apps", APP_NAME))
 
-FLASH_OPTION = ""
-CONFIG_OPTION = ""
+FLASH_OPTION = False
+CONFIG_OPTION = False
 if EXTRA_ARGS:
     for args in EXTRA_ARGS:
+        print(args)
         if args == "config":
             CONFIG_OPTION=True
-            continue
-        FLASH_OPTION = FLASH_OPTION + " --" + args
+        elif args == "flash":
+            FLASH_OPTION = True
 
 #Genarate Root CA
 # os.chdir(os.path.join(CORE_PATH))
@@ -64,4 +65,10 @@ build_ret=os.system(build_cmd)
 print("Build Result:", build_ret)
 if build_ret:
     exit(1)
-    
+
+# flash binary option
+if FLASH_OPTION:
+    flash_cmd = "st-flash write " + os.path.join("build", APP_NAME + ".bin") + " 0x8000000"
+    print("Flash Command:", flash_cmd)
+    flash_ret=os.system(flash_cmd)
+    print("Flash Result:", flash_ret)
