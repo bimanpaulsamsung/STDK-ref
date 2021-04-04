@@ -9,6 +9,13 @@ BSP_NAME=sys.argv[1]
 CORE_PATH = os.path.join(os.environ["STDK_CORE_PATH"])
 BSP_PATH = os.path.join(os.environ["STDK_REF_PATH"],"bsp",BSP_NAME)
 PATCH_PATH = os.path.join(os.environ["STDK_REF_PATH"], "patches", BSP_NAME)
+STM32CUBE_PATH = os.path.join(os.environ["STDK_REF_PATH"],"bsp",BSP_NAME, "stm32l4")
+
+print("BSP_NAME", BSP_NAME)
+print("CORE_PATH", CORE_PATH)
+print("BSP_PATH", BSP_PATH)
+print("PATCH_PATH", PATCH_PATH)
+print("STM32CUBE_PATH", STM32CUBE_PATH)
 
 # MBED_OS_TAG = "mbed-os-5.15.2"
 # 
@@ -23,12 +30,12 @@ PATCH_PATH = os.path.join(os.environ["STDK_REF_PATH"], "patches", BSP_NAME)
 #     os.system("git submodule update --init src/deps/libsodium/libsodium")
 #     os.system("git submodule update --init src/deps/json/cJSON")
 
-def pre_setup():	
-    print("Clone STM32CubeL4...")
-    os.chdir(os.path.join(BSP_PATH, "stm32l4"))
+def pre_setup():
+    os.chdir(STM32CUBE_PATH)
     print(os.getcwd())
-    os.system("git submodule update --init --recursive")
-    os.system("git submodule foreach --recursive git reset --hard")
+    os.system("git reset --hard")
+#     os.system("git submodule update --init --recursive")
+#     os.system("git submodule foreach --recursive git reset --hard")
 
 #    if cmd_status == 0:
 #    	print("Apply mbed os Patches..")
@@ -44,11 +51,11 @@ def pre_setup():
 #     print("Check source code in mbed-os")
    
 def create_link():
-	if not os.path.exists(os.path.join(BSP_PATH)):
-		os.mkdir(os.path.join(BSP_PATH))	
-	if os.path.islink(os.path.join(BSP_PATH, "iot-core")):
-		os.remove(os.path.join(BSP_PATH, "iot-core"))
-		os.symlink(os.path.join(CORE_PATH),os.path.join(BSP_PATH, "iot-core"))
+    if os.path.islink(os.path.join(BSP_PATH, "iot-core")):
+        print("Remove Symbolic link for iot-core")
+        os.remove(os.path.join(BSP_PATH, "iot-core"))
+    print("Create Symbolic link for iot-core")
+    os.symlink(os.path.join(CORE_PATH),os.path.join(BSP_PATH, "iot-core"))
 
 create_link()
 pre_setup()
